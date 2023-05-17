@@ -1,13 +1,9 @@
-
 defmodule Util do
-
   def follow(map, start) do
-    c = Map.get(map, start)
-    if c == nil do
-      [start]
-    else
+    with {:ok, c} <- Map.fetch(map, start) do
       [start | follow(map, c)]
+    else
+      _ -> [start]
     end
   end
-
 end
